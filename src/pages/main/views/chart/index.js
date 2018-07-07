@@ -14,7 +14,7 @@ export default class Chart extends React.PureComponent {
     componentDidMount() {
         this.createChart();
 
-        window.addEventListener('resize', this.handleResize);
+        window.addEventListener('resize', this.createChart);
     }
 
     componentDidUpdate() {
@@ -22,12 +22,14 @@ export default class Chart extends React.PureComponent {
     }
 
     componentWillUnmount() {
-        window.removeEventListener('resize', this.handleResize)
+        window.removeEventListener('resize', this.createChart)
     }
 
     createChart() {
         const { node, props: { params, data } } = this;
         const innerWidth = node.scrollWidth - params.marginLeft - params.marginRight;
+
+        this.node.innerHTML = '';
 
         select(node)
             .attr('width', params.width)
@@ -71,11 +73,6 @@ export default class Chart extends React.PureComponent {
             .attr('stroke-width', 1.5)
             .attr('d', lines);
     }
-
-    handleResize = () => {
-        this.node.innerHTML = '';
-        this.createChart();
-    };
 
     render() {
         return (

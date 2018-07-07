@@ -41,29 +41,29 @@ class Main extends React.Component {
                 />
                 <Table
                     title="blocks"
-                    isError={blocks.isError}
-                    isLoading={blocks.isLoading}
-                    values={blocks.values}
+                    isError={blocks.get('isError')}
+                    isLoading={blocks.get('isLoading')}
+                    values={blocks.get('values')}
                 />
                 <Table
                     transaction
                     title="transactions"
-                    isError={transactions.isError}
-                    isLoading={transactions.isLoading}
-                    values={transactions.values}
+                    isError={transactions.get('isError')}
+                    isLoading={transactions.get('isLoading')}
+                    values={transactions.get('values')}
                 />
                 <Search
-                    isLoading={blockEntity.isLoading}
-                    isError={blockEntity.isError}
-                    entity={blockEntity.entity}
+                    isLoading={blockEntity.get('isLoading')}
+                    isError={blockEntity.get('isError')}
+                    entity={blockEntity.get('entity')}
                     onSearch={actions.fetchSingleBlock}
                 />
                 <hr />
                 <Search
                     transaction
-                    isLoading={txEntity.isLoading}
-                    isError={txEntity.isError}
-                    entity={txEntity.entity}
+                    isLoading={txEntity.get('isLoading')}
+                    isError={txEntity.get('isError')}
+                    entity={txEntity.get('entity')}
                     onSearch={actions.fetchSingleTransaction}
                 />
             </React.Fragment>

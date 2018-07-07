@@ -68,10 +68,10 @@ export default class Blocks extends React.PureComponent {
                 {transaction ?
                     [
                         <div key="1">weight: {entity.weight}</div>,
-                        <div key="2">hash: <Link to="/blocks">{entity.hash}</Link></div>
+                        <div key="2">hash: <Link to={`/transactions/${entity.hash}`}>{entity.hash}</Link></div>
                     ] :
                     [
-                        <div key="1">Height: <Link to="/blocks">{entity.height}</Link></div>,
+                        <div key="1">height: <Link to={`/blocks/${entity.height}`}>{entity.height}</Link></div>,
                         <div key="2">hash: {entity.hash}</div>
                     ]
                 }

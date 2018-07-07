@@ -1,7 +1,29 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-export default class Main extends React.Component {
+import { fetchTodayBlocks } from 'actions/blocks';
+
+import { mapStateToProps } from './selector';
+
+class BlockList extends React.PureComponent {
+    componentDidMount() {
+        const { blocks, actions } = this.props;
+
+        if (blocks.get('values')) {
+            return;
+        }
+
+        actions.fetchTodayBlocks();
+    }
+
     render() {
-        return <div>BLOCK LIST</div>
+        return <div>123</div>
     }
 }
+
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators({ fetchTodayBlocks }, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(BlockList);

@@ -10,7 +10,7 @@ import rootReducer from 'reducers';
 
 import Routes from './routes';
 
-dayjs.extend(relativeTime)
+dayjs.extend(relativeTime);
 
 const store = createStore(
     rootReducer,

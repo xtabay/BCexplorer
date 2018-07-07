@@ -2,11 +2,11 @@ import { createSelector } from 'reselect';
 
 export const mapStateToProps = createSelector(
     [
-        state => state.blocks,
-        state => state.transactions,
-        state => state.costChart.values,
-        state => state.blockEntity,
-        state => state.transactionEntity
+        state => state.get('blocks'),
+        state => state.get('transactions'),
+        state => state.get('costChart').get('values'),
+        state => state.get('blockEntity'),
+        state => state.get('transactionEntity')
     ],
     (blocks, transactions, chartValues, blockEntity, txEntity) => {
         const graphicData = chartValues.map(({ x, y }) => ({
