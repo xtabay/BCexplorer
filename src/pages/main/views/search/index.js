@@ -4,7 +4,6 @@ import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
 
 import Loader from 'components/loader';
-import blockEntity from "../../../../reducers/blockEntity";
 
 const SearchContainer = styled.div`
     display: flex;
@@ -41,6 +40,18 @@ const Button = styled.button`
     cursor: pointer;
 `;
 
+const Text = styled.div`
+    word-break: break-all;
+`;
+
+const LinkId = styled(Link)`
+    text-decoration: none;
+`;
+
+const Form = styled.form`
+    min-width: 300px;
+`;
+
 export default class Blocks extends React.PureComponent {
     state = { value: '' };
 
@@ -57,7 +68,7 @@ export default class Blocks extends React.PureComponent {
     renderItem() {
         const { entity, isError, transaction } = this.props;
 
-        if (isError) return <h2>Block not found, try valid value</h2>;
+        if (isError) return <h2>Error, try another value</h2>;
 
         if (!entity) return null;
 
@@ -67,15 +78,15 @@ export default class Blocks extends React.PureComponent {
             <React.Fragment>
                 {transaction ?
                     [
-                        <div key="1">weight: {entity.weight}</div>,
-                        <div key="2">hash: <Link to={`/transactions/${entity.hash}`}>{entity.hash}</Link></div>
+                        <Text key="1">weight: {entity.weight}</Text>,
+                        <Text key="2">hash: <LinkId to={`/transactions/${entity.hash}`}>{entity.hash}</LinkId></Text>
                     ] :
                     [
-                        <div key="1">height: <Link to={`/blocks/${entity.height}`}>{entity.height}</Link></div>,
-                        <div key="2">hash: {entity.hash}</div>
+                        <Text key="1">height: <LinkId to={`/blocks/${entity.height}`}>{entity.height}</LinkId></Text>,
+                        <Text key="2">hash: {entity.hash}</Text>
                     ]
                 }
-                <div>time: {formattedTime} ago</div>
+                <Text>time: {formattedTime} ago</Text>
             </React.Fragment>
         );
     }
@@ -87,14 +98,14 @@ export default class Blocks extends React.PureComponent {
             <SearchContainer>
                 <div>
                 <h1>Search {transaction ? 'transaction' : 'block'}</h1>
-                    <form onSubmit={this.handleSubmit}>
+                    <Form onSubmit={this.handleSubmit}>
                         <Input
                             placeholder={transaction ? 'Transaction hash' : 'Block height'}
                             value={this.state.value}
                             onChange={this.handleChange}
                         />
                         <Button type="submit">Search</Button>
-                    </form>
+                    </Form>
                 </div>
                 <Content>{isLoading ? <Loader /> : this.renderItem()}</Content>
             </SearchContainer>

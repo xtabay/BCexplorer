@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 
-import Loader from 'components/loader';
 import Pagination from 'components/pagination';
 
 const Block = styled.div`
@@ -15,7 +14,7 @@ const Block = styled.div`
     padding: 20px;
 `;
 
-const BlockHeader = styled(Link)`
+const Hash = styled(Link)`
     display: block;
     font-size: 24px;
     text-decoration: none;
@@ -23,63 +22,47 @@ const BlockHeader = styled(Link)`
     text-align: center;    
     padding-bottom: 20px;
     border-bottom: 1px solid lightgray;
-`;
-
-const Chain = styled.div`
-    height: 50px;
-    width: 50px;
-    margin-right: 10%;
-    background-color: ${props => props.main ? 'lightgreen' : 'lightblue'};
+    word-break: break-all;
 `;
 
 const Info = styled.div`
     display: flex;
-    justify-content: flex-start;
-    padding-top: 30px;
-`;
-
-const SubInfo = styled.div`
-    display: flex;
-    flex-direction: column;
     justify-content: space-between;
+    flex-direction: column;
+    padding-top: 30px;
 `;
 
 const Text = styled.div`
     word-break: break-all;
+    font-size: 20px;
 `;
 
-const LIMIT = 7;
+const LIMIT = 5;
 
 export default class List extends React.PureComponent {
     handleChangePagination = offset => this.props.history.push({search: `offset=${offset}`});
 
-    renderItem({ height, hash, main_chain, time }) {
+    renderItem({ weight, hash, main_chain, time, size }) {
         return (
-            <Block key={height}>
-                <BlockHeader to={`/blocks/${height}`}>{height}</BlockHeader>
+            <Block key={hash}>
+                <Hash to={`/transaction/${hash}`}>{hash}</Hash>
                 <Info>
-                    <Chain title={main_chain ? 'Main chain' : 'Sub chain'} main={main_chain} />
-                    <SubInfo>
-                        <Text>Hash: {hash}</Text>
-                        <Text>Time: {dayjs().from(dayjs(time*1000), true)} ago</Text>
-                    </SubInfo>
+                    <Text>Weight: {weight}</Text>
+                    <Text>Size: {size}</Text>
+                    <Text>Time: {dayjs().from(dayjs(time*1000), true)} ago</Text>
                 </Info>
             </Block>
         );
     }
 
     renderContent() {
-        const { values, isError, isLoading, offset } = this.props;
-
-        if (isError) return <h2>Произошла ошибка, попробуйте обновить страницу</h2>;
-
-        if (values === null || isLoading) return <Loader />;
+        const { tx, offset } = this.props;
 
         return (
             <React.Fragment>
-                {values.slice(offset, offset + LIMIT).map(block => this.renderItem(block))}
+                {tx.slice(offset, offset + LIMIT).map(transaction => this.renderItem(transaction))}
                 <Pagination
-                    max={values.length}
+                    max={tx.length}
                     limit={LIMIT}
                     offset={offset}
                     onChange={this.handleChangePagination}
@@ -88,10 +71,10 @@ export default class List extends React.PureComponent {
         );
     }
 
-   render() {
-       return (
+    render() {
+        return (
             <div>
-                <h1>Blocks List</h1>
+                <h1>Transactions List</h1>
                 {this.renderContent()}
             </div>
         );

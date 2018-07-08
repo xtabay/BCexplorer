@@ -31,8 +31,6 @@ export default class Pagination extends React.PureComponent {
         const { offset, limit, max, onChange } = this.props;
         const offsetSum = offset + limit;
 
-        console.log(max);
-
         return (
             <Container>
                 {(offset > 0) && <Arrow onClick={this.handleGoPrev}>&lArr;</Arrow>}

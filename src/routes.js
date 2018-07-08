@@ -21,7 +21,7 @@ export default () => (
                 <Route exact path ="/" component={Main} />
                 <Route exact path ="/blocks" component={BlockList} />
                 <Route exact path ="/blocks/:id" component={Block} />
-                <Route exact path ="/transactions/:id" component={Transaction} />
+                <Route exact path ="/transaction/:id" component={Transaction} />
                 <Route exact path ="/graphics" component={Graphics} />
                 <Route component={() => <div>Oops 404</div>} />
             </Switch>

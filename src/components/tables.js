@@ -9,7 +9,9 @@ export const Row = styled.div`
 
 export const Cell = styled.div`
     font-size: 18px;
-    font-weight: ${props => props.big ? 'bold;' : 'normal'}
+    font-weight: ${props => props.big ? 'bold;' : 'normal'};
+    word-break: ${props => props.hash ? 'break-all' : 'inherit'};
+    &:not(:last-child) { margin-right: 5px; }
 `;
 
 export const ShowMore = styled(Link)`

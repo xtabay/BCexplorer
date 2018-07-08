@@ -34,13 +34,13 @@ export default class Blocks extends React.PureComponent {
                                         <Cell key={1}>
                                             {weight}
                                         </Cell>,
-                                        <Cell key={2}><Hash to={this.getLink(hash)}>{hash}</Hash></Cell>
+                                        <Cell key={2} hash><Hash to={this.getLink(hash)}>{hash}</Hash></Cell>
                                     ] :
                                     [
                                         <Cell key={1}>
                                             <Hash to={this.getLink(height)}>{height}</Hash>
                                         </Cell>,
-                                        <Cell key={2}>{hash}</Cell>
+                                        <Cell key={2} hash>{hash}</Cell>
                                     ]
                                 }
                                 <Cell>{dayjs().from(dayjs(time*1000), true)} ago</Cell>
