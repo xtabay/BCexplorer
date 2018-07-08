@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { createBrowserHistory } from 'history';
+
 import Main from 'pages/main';
 import Block from 'pages/block';
 import BlockList from 'pages/blockList';
