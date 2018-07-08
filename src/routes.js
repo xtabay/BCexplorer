@@ -7,7 +7,7 @@ import { createBrowserHistory } from 'history';
 import Main from 'pages/main';
 import Block from 'pages/block';
 import BlockList from 'pages/blockList';
-import Transaction from 'pages/transactions';
+import Transaction from 'pages/transaction';
 import Graphics from 'pages/graphics';
 
 const Container = styled.div`

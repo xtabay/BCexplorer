@@ -16,6 +16,7 @@ const Content = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    width: 50%;
 `;
 
 const Input = styled.input`
@@ -26,6 +27,7 @@ const Input = styled.input`
     border: 2px solid lightgray;
     margin-right: 10px;    
     outline: none;
+    width: 60%;
 `;
 
 const Button = styled.button`
@@ -38,10 +40,12 @@ const Button = styled.button`
     border-radius: 5px;
     outline: none;
     cursor: pointer;
+    margin-top: 10px;
 `;
 
 const Text = styled.div`
-    word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
 `;
 
 const LinkId = styled(Link)`
@@ -49,7 +53,7 @@ const LinkId = styled(Link)`
 `;
 
 const Form = styled.form`
-    min-width: 300px;
+    min-width: 150px;
 `;
 
 export default class Blocks extends React.PureComponent {
@@ -79,7 +83,7 @@ export default class Blocks extends React.PureComponent {
                 {transaction ?
                     [
                         <Text key="1">weight: {entity.weight}</Text>,
-                        <Text key="2">hash: <LinkId to={`/transactions/${entity.hash}`}>{entity.hash}</LinkId></Text>
+                        <Text key="2">hash: <LinkId to={`/transaction/${entity.hash}`}>{entity.hash}</LinkId></Text>
                     ] :
                     [
                         <Text key="1">height: <LinkId to={`/blocks/${entity.height}`}>{entity.height}</LinkId></Text>,

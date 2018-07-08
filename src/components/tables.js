@@ -11,7 +11,12 @@ export const Cell = styled.div`
     font-size: 18px;
     font-weight: ${props => props.big ? 'bold;' : 'normal'};
     word-break: ${props => props.hash ? 'break-all' : 'inherit'};
-    &:not(:last-child) { margin-right: 5px; }
+    word-wrap: unset;
+    word-break: unset;
+    min-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    &:not(:last-child) { margin-right: 5px; };
 `;
 
 export const ShowMore = styled(Link)`
