@@ -55,7 +55,7 @@ class Main extends React.Component {
                 <Search
                     isLoading={blockEntity.get('isLoading')}
                     isError={blockEntity.get('isError')}
-                    entity={blockEntity.get('entity')}
+                    entity={blockEntity}
                     onSearch={actions.fetchSingleBlock}
                 />
                 <hr />
@@ -63,7 +63,7 @@ class Main extends React.Component {
                     transaction
                     isLoading={txEntity.get('isLoading')}
                     isError={txEntity.get('isError')}
-                    entity={txEntity.get('entity')}
+                    entity={txEntity}
                     onSearch={actions.fetchSingleTransaction}
                 />
             </React.Fragment>

@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
-const UglifyJs = require('uglifyjs-webpack-plugin')
+const UglifyJs = require('uglifyjs-webpack-plugin');
 
 
 const htmlPlugin = new HtmlWebPackPlugin({
@@ -29,7 +29,7 @@ module.exports = {
         compress: true,
         port: 9000
     },
-    entry: ['babel-polyfill', './src/index.js'],
+    entry: ['babel-polyfill', path.join(__dirname, '/src/index.js')],
     module: {
       rules: [
         {

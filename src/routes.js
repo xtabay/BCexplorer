@@ -23,7 +23,7 @@ export default () => (
                 <Route exact path ="/blocks/:id" component={Block} />
                 <Route exact path ="/transaction/:id" component={Transaction} />
                 <Route exact path ="/graphics" component={Graphics} />
-                <Route component={() => <div>Oops 404</div>} />
+                <Route component={() => <h1>Oops 404</h1>} />
             </Switch>
         </Container>
     </BrowserRouter>

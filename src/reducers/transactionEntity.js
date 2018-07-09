@@ -11,10 +11,10 @@ const initialState = Map({
 export default (state = initialState, action) => {
     switch (action.type) {
         case FETCH_SINGLE_TRANSACTION:
-            return initialState.set('isLoading', true);
+            return state.set('isLoading', true).set('isError', false);
 
         case FETCH_SINGLE_TRANSACTION_COMPLETED:
-            return state.set('isLoading', false).set('entity', action.payload.data);
+            return state.set('isLoading', false).merge({ [action.payload.data.hash]: action.payload.data });
 
         case FETCH_SINGLE_TRANSACTION_FAILED:
             return state.set('isLoading', false).set('isError', true);

@@ -21,4 +21,12 @@ export const Cell = styled.div`
 
 export const ShowMore = styled(Link)`
     display: block;
+    line-height: 40px;
+    width: 120px;
+    text-align: center;
+    height: 40px;
+    background-color: royalblue;
+    text-decoration: none;
+    color: white;
+    border-radius: 9px;
 `;

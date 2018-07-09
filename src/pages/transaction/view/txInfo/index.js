@@ -73,7 +73,7 @@ export default class BlockTx extends React.PureComponent {
 
         if (isError) return <h2>Oops, something went wrong</h2>;
 
-        if (transaction === null || isLoading) return <Loader />;
+        if (!transaction || isLoading) return <Loader />;
 
         return (
             <React.Fragment>

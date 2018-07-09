@@ -10,6 +10,8 @@ const Hash = styled(Link)`
     text-decoration: none;
 `;
 
+const LIMIT = 10;
+
 export default class Blocks extends React.PureComponent {
     getLink = hash => `/${this.props.title}/${hash}`;
 
@@ -24,7 +26,7 @@ export default class Blocks extends React.PureComponent {
                     <Cell big>Time</Cell>
                 </Row>
                 {values
-                    .slice(0, 10)
+                    .slice(0, LIMIT)
                     .map(({ height, hash, time, weight }) => (
                         <React.Fragment key={hash}>
                             <hr />
@@ -48,7 +50,7 @@ export default class Blocks extends React.PureComponent {
                         </React.Fragment>
                     ))
                 }
-                {values.length > 10 && !transaction ? (
+                {values.length > LIMIT && !transaction ? (
                     <Row centered>
                         <ShowMore to="/blocks">
                             Show all {title}

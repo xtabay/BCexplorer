@@ -46,6 +46,7 @@ const Button = styled.button`
 const Text = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
 `;
 
 const LinkId = styled(Link)`
@@ -71,23 +72,27 @@ export default class Blocks extends React.PureComponent {
 
     renderItem() {
         const { entity, isError, transaction } = this.props;
+        const newEntity = entity.get(this.state.value);
 
         if (isError) return <h2>Error, try another value</h2>;
 
-        if (!entity) return null;
+        if (!newEntity) return null;
 
-        const formattedTime = dayjs().from(dayjs(entity.time*1000), true);
+        const jsEntity = newEntity.toJS();
+
+
+        const formattedTime = dayjs().from(dayjs(jsEntity.time*1000), true);
 
         return (
             <React.Fragment>
                 {transaction ?
                     [
-                        <Text key="1">weight: {entity.weight}</Text>,
-                        <Text key="2">hash: <LinkId to={`/transaction/${entity.hash}`}>{entity.hash}</LinkId></Text>
+                        <Text key="1">weight: {jsEntity.weight}</Text>,
+                        <Text key="2">hash: <LinkId to={`/transaction/${jsEntity.hash}`}>{jsEntity.hash}</LinkId></Text>
                     ] :
                     [
-                        <Text key="1">height: <LinkId to={`/blocks/${entity.height}`}>{entity.height}</LinkId></Text>,
-                        <Text key="2">hash: {entity.hash}</Text>
+                        <Text key="1">height: <LinkId to={`/blocks/${jsEntity.height}`}>{jsEntity.height}</LinkId></Text>,
+                        <Text key="2">hash: {jsEntity.hash}</Text>
                     ]
                 }
                 <Text>time: {formattedTime} ago</Text>

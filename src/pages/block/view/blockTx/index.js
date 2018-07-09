@@ -11,7 +11,7 @@ export default class BlockTx extends React.PureComponent {
 
         if (isError) return <h2>Oops, something went wrong</h2>;
 
-        if (block === null || isLoading) return <Loader />;
+        if (!block || isLoading) return <Loader />;
 
         return (
             <React.Fragment>

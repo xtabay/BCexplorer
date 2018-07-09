@@ -8,23 +8,30 @@ import TxInfo from 'pages/transaction/view/txInfo';
 import { mapStateToProps } from './selector';
 
 class Blocks extends React.PureComponent {
-    componentDidMount() {
-        const { transaction, actions, match: { params: { id } } } = this.props;
+    constructor(props) {
+        super();
 
-        if (transaction.get('entity')) {
+        this.id = props.match.params.id;
+    }
+
+    componentDidMount() {
+        const { transaction, actions } = this.props;
+
+        if (transaction.get(this.id)) {
             return;
         }
 
-        actions.fetchSingleTransaction(id);
+        actions.fetchSingleTransaction(this.id);
     }
 
     render() {
-        const { transaction, match } = this.props;
+        const { transaction } = this.props;
+        const entity = transaction.get(this.id);
 
         return (
             <TxInfo
-                hash={match.params.id}
-                transaction={transaction.get('entity')}
+                hash={this.id}
+                transaction={entity && entity.toJS()}
                 isError={transaction.get('isError')}
                 isLoading={transaction.get('isLoading')}
             />

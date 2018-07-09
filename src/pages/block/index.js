@@ -9,26 +9,33 @@ import BlockInfo from 'pages/block/view/blockTx';
 import { mapStateToProps } from './selector';
 
 class Blocks extends React.PureComponent {
-    componentDidMount() {
-        const { block, actions, match: { params: { id } } } = this.props;
+    constructor(props) {
+        super();
 
-        if (block.get('entity')) {
+        this.id = props.match.params.id;
+    }
+
+    componentDidMount() {
+        const { block, actions } = this.props;
+
+        if (block.get(this.id)) {
             return;
         }
 
-        actions.fetchSingleBlock(Number(id));
+        actions.fetchSingleBlock(this.id);
     }
 
     render() {
-        const { block, match, location: { search }, history } = this.props;
+        const { block, location: { search }, history } = this.props;
         const offset = Number(queryString.parse(search).offset) || 0;
+        const entity = block.get(this.id);
 
         return (
             <BlockInfo
+                height={this.id}
                 offset={offset}
                 history={history}
-                height={match.params.id}
-                block={block.get('entity')}
+                block={entity && entity.toJS()}
                 isError={block.get('isError')}
                 isLoading={block.get('isLoading')}
             />
